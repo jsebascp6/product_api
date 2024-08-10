@@ -1,24 +1,54 @@
-# README
+# Product API
+Esta es una API para gestionar productos, construida con Ruby on Rails y Docker.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requisitos
+- Docker
+- Docker Compose
 
-Things you may want to cover:
+## Instalación y Configuración
+1. Clona el repositorio:
+   ```bash
+   git clone git@github.com:jsebascp6/product_api.git
+   cd product_api
 
-* Ruby version
+2. Construye la imagen de Docker:
+   ```bash
+   sudo docker-compose build web
 
-* System dependencies
+3. Configura la base de datos:
+    - Opcional: Si necesitas limpiar la base de datos existente:
+      ```bash
+      sudo docker-compose run web bin/rails db:drop
+    - Crea la base de datos:
+      ```bash
+      sudo docker-compose run web bin/rails db:create
+    - Aplica las migraciones:
+      ```bash
+      sudo docker-compose run web bin/rails db:create
+  
+4. Inicia el servidor:
+      ```bash
+      sudo docker-compose up web
+  El servidor estará disponible en http://localhost:3000.
 
-* Configuration
+## Endpoints
+- GET /api/v1/products - Lista todos los productos.
+- POST /api/v1/products - Crea un nuevo producto.
+- GET /api/v1/products/:id - Muestra un producto específico.
+- PATCH/PUT /api/v1/products/:id - Actualiza un producto.
+- DELETE /api/v1/products/:id - Elimina un producto.
 
-* Database creation
+## Autenticación
+La API utiliza autenticación básica. Para acceder a los endpoints protegidos, se deben enviar las credenciales como parte de la solicitud.
 
-* Database initialization
+## CORS
+Esta API está configurada para permitir solicitudes desde localhost y 127.0.0.1 en varios puertos, permitiendo el uso de credenciales.
 
-* How to run the test suite
+## Pruebas
+Para ejecutar las pruebas, utiliza RSpec con Docker:
+```bash
+sudo docker-compose run web bundle exec rspec spec/*
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Contribuciones
+Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull request.
